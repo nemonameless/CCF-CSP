@@ -261,7 +261,10 @@ class COCODetection(data.Dataset):
     def _coco_results_one_category(self, boxes, cat_id):
         results = []
         for im_ind, index in enumerate(self.image_indexes):
-            dets = boxes[im_ind].astype(np.float)
+            try:
+                dets = boxes[im_ind].astype(np.float)
+            except:
+                dets = []
             if dets == []:
                 continue
             scores = dets[:, -1]
